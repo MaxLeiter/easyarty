@@ -162,24 +162,28 @@ export default function Home() {
               </Table>
             </Card>
           </div>
-          <span>
+
+          <footer>
+          <div>
                   Dark mode?
                  <Spacer x={1} inline={true} />
                  <Toggle initialChecked={themeType === "dark"} onChange={onThemeChange} size="large" />
-          </span>
+          </div>
+          </footer>
         </main>
-        
+
         </div>
       <style jsx>{`
         .container {
           display: grid; 
           grid-template-columns: 1fr 1fr 1fr; 
-          grid-template-rows: 1fr 1fr 1fr;
+          grid-template-rows: 1.2fr 1.2fr 1.2fr .4fr;
           gap: 24px 24px; 
           grid-template-areas: 
             "input input history"
             "result result history"
-            "result result history";
+            "result result history"
+            "footer footer footer";
           max-width: 1500px;
           max-height: 1500px;
           margin: auto;
@@ -219,6 +223,7 @@ export default function Home() {
         .history { grid-area: history; }
         .input { grid-area: input; }
         .result { grid-area: result; }
+        footer { grid-area: footer; }
       `}</style>
     </GeistProvider>
   )
