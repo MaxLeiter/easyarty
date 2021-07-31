@@ -164,11 +164,11 @@ export default function Home() {
           </div>
 
           <footer>
-          <div>
-                  Dark mode?
-                 <Spacer x={1} inline={true} />
-                 <Toggle initialChecked={themeType === "dark"} onChange={onThemeChange} size="large" />
-          </div>
+            <div>
+                    Dark mode?
+                  <Spacer x={1} inline={true} />
+                  <Toggle initialChecked={themeType === "dark"} onChange={onThemeChange} size="large" />
+            </div>
           </footer>
         </main>
 
@@ -198,12 +198,14 @@ export default function Home() {
 
         @media only screen and (max-width: 1000px) {
           .container {
+            margin: 8px;
             grid-template-columns: 1fr;
             grid-template-rows: 1fr;
             grid-template-areas: 
               "input"
               "result"
-              "history";
+              "history"
+              "footer";
           }
 
           .form {
@@ -214,8 +216,6 @@ export default function Home() {
 
           .form span {
             display: flex;
-            flex-direction: column;
-            align-children: center;
           }
     
         }
