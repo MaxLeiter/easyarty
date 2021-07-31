@@ -1,19 +1,23 @@
 import Head from 'next/head'
 import { createRef, useEffect, useState } from 'react'
-import { GeistProvider, Note, Spacer, Table, Card, CssBaseline, Input, Button, Text } from '@geist-ui/react'
+import { Toggle, GeistProvider, Note, Spacer, Table, Card, CssBaseline, Input, Button, Text } from '@geist-ui/react'
 
 type Result = {
-  id: number,
+  id: string,
   input: number,
   output: number,
+  team: "Axis/Ally" | "Russia",
   operation: Function,
 }
 
 export default function Home() {
+  const [themeType, setThemeType] = useState('light')
   const [input, setInput] = useState<string>("1000");
   const [error, setError] = useState<string>();
   const [result, setResult] = useState<string>("764");
   const [results, setResults] = useState<Result[]>([]);
+  const [russianArty, setRussianArty] = useState<boolean>(false);
+
   const inputRef = createRef<HTMLInputElement>();
 
   useEffect(() => {
@@ -22,17 +26,21 @@ export default function Home() {
     }
   }, [])
 
+  const switchThemes = () => {
+    setThemeType(last => (last === 'dark' ? 'light' : 'dark'))
+  }
+
   const title = "Hell Let Loose artillery calculator",
         description = "A dead simple calculator for artillery in Hell Let Loose."
 
-  const m = -0.237035714285714,
-        b = 1001.46547619048,
-        xMin = 100,
-        xMax = 1600,
-        x = 100,
-        y = 978
+
+  const xMin = 100,
+        xMax = 1600;
 
   const calculate = (point: number) => {
+      let m = russianArty ? -.2136691176 : -0.237035714285714,
+      b = russianArty ? 1141.721500 : 1001.46547619048;
+
       const x = point;
       if (x >= xMin && x <= xMax) {
           return Math.round(m * x + b)
@@ -44,38 +52,60 @@ export default function Home() {
   const operation = (actions, rowData) => {
     return <Button type="error" auto size="mini" onClick={() => {
       actions.remove()
-      setResults(results.filter((r) => r.id !== rowData.id))
+      // setResults(results.filter((r) => r.id !== rowData.rowValue.id))
     }}>Remove</Button>
   }
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    const output = calculate(parseInt(input))
+    const output = updateValue();
+    if (output > 0)
+      setResults([{ id: uuidv4(), input: parseInt(input), output, operation, team: russianArty ? "Russia" : "Axis/Ally"}, ...results])
+
+  }
+
+  const updateValue = (value?: string) => {
+    const output = calculate(parseInt(value ? value : input))
 
     if (output) {
       setResult(output.toString())
       setError("")
-    setResults([{ id: results.length + 1, input: parseInt(input), output, operation }, ...results])
+      return output;
     }
+    return -1;
   }
 
   const onChange = ({ target }) => {
     try {
       setInput(target.value);
+      updateValue(target.value);
     } catch (e) {
-      setError("Input must be a number.")
+      if (input)
+        setError("Input must be a number.")
     }
   }
+
+  const onTableChange = (results: Result[]) => {
+    setResults(results);
+  };
 
   const handleKeypress = e => {
     if (e.keyCode === 13) {
       onFormSubmit(e);
     }
   };
-  
+
+  const onToggleChange = (e) => {
+    setRussianArty(e.target.checked);
+    updateValue();
+  }
+
+  const onThemeChange = (e) => {
+    switchThemes();
+  }
 
   return (
-    <GeistProvider>
+    <GeistProvider themeType={themeType}>
        <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta charSet="utf-8" />
@@ -102,9 +132,16 @@ export default function Home() {
           <div className="input">
             <Card>
               <Text h2>Hell Let Loose Artillery Calculator</Text>
-              <form onSubmit={onFormSubmit}>
+              <form onSubmit={onFormSubmit} className="form">
+                <span>
                 <Input autoFocus ref={inputRef} onKeyPress={handleKeypress} value={input} onChange={onChange} width="200px" label="Distance" placeholder="500" clearable />
-                <Button onClick={onFormSubmit} type={error ? "error" : "success"} style={{marginLeft: 8}}>Calculate</Button>
+                <Button onClick={onFormSubmit} type={error ? "error" : "success"} style={{marginLeft: 8}}>Save</Button>
+                </span>
+                <span>
+                  Russians?
+                 <Spacer x={1} inline={true} />
+                 <Toggle initialChecked={russianArty} onChange={onToggleChange} size="large" />
+                </span>
               </form>
               {error && <Note label="Error" type="error">{error}</Note>}
             </Card>
@@ -116,15 +153,22 @@ export default function Home() {
           </div>
           <div className="history">
             <Card>
-              <Text h3> History </Text>
-              <Table data={results}>
+              <Text h3> Saved </Text>
+              <Table data={results} onChange={onTableChange}>
                 <Table.Column prop="input" label="input (m)" />
                 <Table.Column prop="output" label="output (mil)" />
-                <Table.Column prop="operation" label="" width={150} />
+                <Table.Column prop="team" label="team"  />
+                <Table.Column prop="operation" label="" />
               </Table>
             </Card>
           </div>
+          <span>
+                  Dark mode?
+                 <Spacer x={1} inline={true} />
+                 <Toggle initialChecked={themeType === "dark"} onChange={onThemeChange} size="large" />
+          </span>
         </main>
+        
         </div>
       <style jsx>{`
         .container {
@@ -142,6 +186,12 @@ export default function Home() {
           margin-top: 24px;
         }
 
+        .form {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
         @media only screen and (max-width: 1000px) {
           .container {
             grid-template-columns: 1fr;
@@ -150,6 +200,18 @@ export default function Home() {
               "input"
               "result"
               "history";
+          }
+
+          .form {
+            display: flex;
+            flex-direction: column;
+            height: 150px;
+          }
+
+          .form span {
+            display: flex;
+            flex-direction: column;
+            align-children: center;
           }
     
         }
@@ -160,4 +222,11 @@ export default function Home() {
       `}</style>
     </GeistProvider>
   )
+}
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
 }
