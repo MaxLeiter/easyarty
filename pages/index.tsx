@@ -173,7 +173,7 @@ export default function Home() {
         </main>
 
         </div>
-      <style jsx>{`
+      <style jsx global>{`
         .container {
           display: grid; 
           grid-template-columns: 1fr 1fr 1fr; 
