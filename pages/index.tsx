@@ -139,7 +139,6 @@ export default function Home() {
                 </span>
                 <span>
                   Russians?
-                 <Spacer x={1} inline={true} />
                  <Toggle initialChecked={russianArty} onChange={onToggleChange} size="large" />
                 </span>
               </form>
@@ -168,6 +167,9 @@ export default function Home() {
                     Dark mode?
                   <Spacer x={1} inline={true} />
                   <Toggle initialChecked={themeType === "dark"} onChange={onThemeChange} size="large" />
+            </div>
+            <div>
+              Made by <a role="link" target="_blank" rel="noopener noreferrer nofollow" href="https://twitter.com/max_leiter">Max Leiter</a>. Source on <a role="link" target="_blank" rel="noopener noreferrer nofollow" href="https://github.com/MaxLeiter/easyarty">GitHub</a>.
             </div>
           </footer>
         </main>
