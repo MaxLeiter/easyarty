@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md py-3 space-y-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
       <h1 className="text-4xl text-center font-bold text-gray-900 dark:text-gray-100">
-        Easyarty
+        EasyArty
         {/* TODO: move this into help-modal */}
         <button
           className="relative inline-block ml-2 text-gray-500 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-800"
