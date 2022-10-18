@@ -19,7 +19,6 @@ const Calculator = () => {
     }
   }, [inputRef.current]);
 
-  // autofocus on input except esc or tab
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Escape" || e.key === "Tab") {
       return;
@@ -83,11 +82,12 @@ const Calculator = () => {
     }
 
     if (input && result) {
-      if (results.length > 0) {
-        if (results[0].input === input && results[0].output === result) {
-          return;
-        }
-      }
+      // if (results.length > 0) {
+      //   const lastResult = results[results.length - 1];
+      //   if (lastResult.input === input && lastResult.output === result) {
+      //     return;
+      //   }
+      // }
 
       setResults((prev) => [
         ...prev,
@@ -127,7 +127,6 @@ const Calculator = () => {
             Russian?
           </span>
         </label>
-        {/* error */}
         {error && (
           <div className="flex items-center justify-center w-full px-4 py-2 text-sm text-red-600 bg-red-100 rounded-md dark:bg-red-800 dark:text-red-300">
             {error}
@@ -139,7 +138,6 @@ const Calculator = () => {
         >
           {result}
         </output>
-        {/* save result button */}
         <button
           type="submit"
           className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-700"
