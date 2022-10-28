@@ -27,7 +27,7 @@ const Results = ({ results, setResults }: ResultsProps) => {
   });
 
   return (
-    <div className="w-full border border-gray-300 rounded-md dark:border-gray-600 pt-4">
+    <div className="w-full pt-4 border border-gray-300 rounded-md dark:border-gray-600">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
         Saved results
       </h2>
@@ -36,7 +36,7 @@ const Results = ({ results, setResults }: ResultsProps) => {
         <thead className={tableHeadClasses}>
           <tr className={tableRowClasses}>
             {columns.map((column) => {
-              return <th className={tableCellClasses}>{column}</th>;
+              return <th className={tableCellClasses} key={column}>{column}</th>;
             })}
             <th className={tableCellClasses}>Delete</th>
           </tr>

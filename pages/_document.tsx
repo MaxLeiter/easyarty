@@ -1,6 +1,4 @@
-// _document.tsx
-
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from "next/document";
 
 const MyDocument = () => {
  const pageTitle = "Hell Let Loose artillery calculator",

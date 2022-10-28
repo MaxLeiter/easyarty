@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from "react";
 import { ChangeEvent, useState } from "react";
 import calculate, { DistanceError } from "../../lib/calculate";
@@ -82,13 +84,6 @@ const Calculator = () => {
     }
 
     if (input && result) {
-      // if (results.length > 0) {
-      //   const lastResult = results[results.length - 1];
-      //   if (lastResult.input === input && lastResult.output === result) {
-      //     return;
-      //   }
-      // }
-
       setResults((prev) => [
         ...prev,
         {
@@ -104,7 +99,7 @@ const Calculator = () => {
   return (
     <>
       <form
-        className="flex flex-col items-center justify-center w-full max-w-md px-4 py-6 space-y-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg flex-shrink-0"
+        className="flex flex-col items-center justify-center flex-shrink-0 w-full max-w-md px-4 py-6 space-y-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
         onSubmit={(e) => {
           e.preventDefault();
           saveResult();
@@ -113,7 +108,7 @@ const Calculator = () => {
         <Input value={input} onChange={onInputChange} ref={inputRef} />
         <label
           htmlFor="default-toggle"
-          className="inline-flex relative cursor-pointer w-full"
+          className="relative inline-flex w-full cursor-pointer"
         >
           <input
             type="checkbox"
@@ -140,18 +135,15 @@ const Calculator = () => {
         </output>
         <button
           type="submit"
-          className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-700"
-          // onClick={saveResult}
+          className="invisible w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md lg:visible hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-700"
         >
           Save
         </button>
       </form>
-      <div className="absolute w-96 h-96 -bottom-24 lg:top-0 lg:right-0 invisible lg:visible md:visible">
-        {/* <Draggable> */}
-        <div className=" bg-gray-100 rounded-md dark:bg-gray-700">
+      <div className="absolute invisible w-96 h-96 -bottom-24 lg:top-0 lg:right-0 lg:visible">
+        <div className="bg-gray-100 rounded-md dark:bg-gray-700">
           <Results results={results} setResults={setResults} />
         </div>
-        {/* </Draggable> */}
       </div>
     </>
   );

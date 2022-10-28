@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
+import { useTheme, ThemeProvider } from "next-themes";
 
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false);
@@ -15,14 +17,17 @@ const ThemeSwitch = () => {
 
   return (
     <div aria-hidden>
-      <label htmlFor="theme" className="ml-2 text-gray-900 dark:text-gray-100 pr-2">
+      <label
+        htmlFor="theme"
+        className="pr-2 ml-2 text-gray-900 dark:text-gray-100"
+      >
         Theme
       </label>
       <select
         id="theme"
         value={theme}
         onChange={(e) => setTheme(e.target.value)}
-        className="select select-bordered w-40 h-8 mt-4 bg-gray-100 dark:bg-gray-900 rounded-md"
+        className="w-40 h-8 bg-gray-100 rounded-md select select-bordered dark:bg-gray-900"
       >
         <option value="system" className="text-gray-900 dark:text-gray-100">
           System
@@ -38,4 +43,14 @@ const ThemeSwitch = () => {
   );
 };
 
-export default ThemeSwitch;
+export default () => <ThemeProvider
+    attribute="class"
+    cookieName="maxleitercom-theme"
+    defaultTheme="dark"
+    value={{
+      light: "light",
+      dark: "dark",
+    }}
+  >
+    <ThemeSwitch />
+  </ThemeProvider>;

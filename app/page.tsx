@@ -1,17 +1,13 @@
-import Calculator from "../components/calculator";
-import ThemeSwitch from "../components/theme-switcher";
-import Footer from "../components/footer";
-import Head from "next/head";
-import Header from "../components/header";
+import { ThemeProvider } from "next-themes";
+import Calculator from "./components/calculator";
+import Footer from "./components/footer";
+import Header from "./components/header";
+import ThemeSwitch from "./components/theme-switcher";
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>easyarty - Hell Let Loose artillery calculator</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <div className="container bg-gray-100 dark:bg-gray-900 min-h-screen min-w-full flex flex-col justify-between">
+      <div className="container flex flex-col justify-between min-w-full min-h-screen bg-gray-100 dark:bg-gray-900">
         <section className="flex items-center justify-center w-full">
           <Header />
         </section>

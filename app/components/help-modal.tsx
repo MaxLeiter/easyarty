@@ -28,14 +28,14 @@ const HelpModal = ({ isOpen, onClose }) => {
       open={isOpen}
     >
       <div
-        className="fixed inset-0 bg-gray-500 bg-opacity-30 transition-opacity z-0 backdrop-filter backdrop-blur-sm"
+        className="fixed inset-0 transition-opacity bg-gray-500 z-9 bg-opacity-30 backdrop-filter backdrop-blur-sm"
         aria-hidden="true"
         onClick={handleClick}
       />
-      <div className="bg-white dark:bg-gray-900 rounded-lg w-full max-w-2xl mx-auto p-4 sm:p-6 sm:pb-4 text-left z-10 h-max overflow-y-scroll">
+      <div className="z-10 w-full max-w-2xl p-4 mx-auto overflow-y-scroll text-left bg-white rounded-lg dark:bg-gray-900 sm:p-6 sm:pb-4 h-max">
         <div className="">
           <h1 className="text-2xl font-bold">Welcome to EasyArty.com!</h1>
-          <p className="mt-3 w-full">
+          <p className="w-full mt-3">
             This is an artillery calculator for{" "}
             <Link
               href="https://www.hellletloose.com/"
@@ -44,15 +44,15 @@ const HelpModal = ({ isOpen, onClose }) => {
               Hell Let Loose.
             </Link>
           </p>
-          <p className="mt-3 w-full">
+          <p className="w-full mt-3">
             Input the distance you want to strike and we'll tell you the{" "}
             <abbr title="milliradian">MIL</abbr>. You can also save the results
             to a list for easy access.
           </p>
-          <h2 className="mt-6 text-lg leading-6 font-medium text-gray-900 dark:text-gray-100">
+          <h2 className="mt-6 text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
             Artillery tips
           </h2>
-          <ul className="list-disc list-inside mt-3 space-y-2">
+          <ul className="mt-3 space-y-2 list-disc list-inside">
             <li>
               Artillery is most effective when you know where the enemy is.
               Either know the game well, or have someone pinging for you.
@@ -64,7 +64,7 @@ const HelpModal = ({ isOpen, onClose }) => {
             <li>
               Artillery uses resources that your team needs. Use them sparingly
               and keep an eye on your resources at the top of the map.
-              <ul className="list-disc list-inside ml-8">
+              <ul className="ml-8 list-disc list-inside">
                 <li>HE &mdash; 3 munitions</li>
                 <li>Smoke &mdash; 5 munitions</li>
               </ul>
@@ -75,7 +75,7 @@ const HelpModal = ({ isOpen, onClose }) => {
           <button
             type="button"
             onClick={onClose}
-            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-800 dark:bg-gray-100 text-base font-medium text-white dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
+            className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-gray-800 border border-transparent rounded-md shadow-sm dark:bg-gray-100 dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
             Close
           </button>

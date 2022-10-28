@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from "react";
 import HelpModal from "./help-modal";
 
@@ -19,8 +21,8 @@ const Header = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full max-w-md py-3 space-y-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-      <h1 className="text-4xl text-center font-bold text-gray-900 dark:text-gray-100">
+    <div className="flex flex-col items-center justify-center w-full max-w-md py-3 space-y-1 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+      <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-gray-100">
         EasyArty
         {/* TODO: move this into help-modal */}
         <button
@@ -31,7 +33,7 @@ const Header = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`w-6 h-6 text-gray-500 dark:text-gray-400 ${
-              !hasEverOpenedHelp && "animate-pulse"
+              !hasEverOpenedHelp ? "animate-pulse" : ""
             }`}
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -47,6 +49,7 @@ const Header = () => {
       <p className="text-center text-gray-700 dark:text-gray-300">
         Hell Let Loose artillery calculator
       </p>
+      <div id="modal" />
       {helpOpen && <HelpModal isOpen={helpOpen} onClose={toggleHelp} />}
     </div>
   );
