@@ -8,7 +8,7 @@ import Input from "./input";
 import uuidv4 from "../../lib/uuidv4";
 
 const Calculator = () => {
-  const [input, setInput] = useState<string>();
+  const [input, setInput] = useState<number>();
   const [error, setError] = useState<string>();
   const [result, setResult] = useState<number>(764);
   const [results, setResults] = useState<Result[]>([]);
@@ -40,7 +40,7 @@ const Calculator = () => {
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     try {
-      setInput(e.target.value);
+      setInput(parseInt(e.target.value));
       const output = calculate(russianArty, parseInt(e.target.value));
       if (output) {
         setResult(output);
@@ -61,7 +61,7 @@ const Calculator = () => {
   const onRussianArtyChange = (e: ChangeEvent<HTMLInputElement>) => {
     setRussianArty(e.target.checked);
     try {
-      const output = calculate(e.target.checked, parseInt(input));
+      const output = calculate(e.target.checked, input);
       if (output) {
         setResult(output);
         setError("");
@@ -88,7 +88,7 @@ const Calculator = () => {
         ...prev,
         {
           id: uuidv4(),
-          input: parseInt(input),
+          input,
           team: russianArty ? "Russia" : "Axis/Ally",
           output: result,
         },
