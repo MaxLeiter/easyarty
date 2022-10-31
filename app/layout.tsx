@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import { ServerThemeProvider } from "next-themes";
 import { AnalyticsWrapper } from "./components/analytics";
 
 export default function RootLayout({
@@ -11,16 +10,16 @@ export default function RootLayout({
     "A dead simple calculator for artillery in Hell Let Loose with support for all teams.";
   const pageTitle = "EasyArty - the Hell Let Loose artillery calculator";
   return (
-    <ServerThemeProvider
-      attribute="class"
-      cookieName="maxleitercom-theme"
-      defaultTheme="dark"
-      value={{
-        light: "light",
-        dark: "dark",
-      }}
-    >
-      <html lang="en">
+    // <ServerThemeProvider
+    //   attribute="class"
+    //   cookieName="maxleitercom-theme"
+    //   defaultTheme="dark"
+    //   value={{
+    //     light: "light",
+    //     dark: "dark",
+    //   }}
+    // >
+      <html lang="en" className="bg-gray-100 dark:bg-gray-900">
         <head>
           <title>{pageTitle}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,6 +39,5 @@ export default function RootLayout({
           <AnalyticsWrapper />
         </body>
       </html>
-    </ServerThemeProvider>
   );
 }

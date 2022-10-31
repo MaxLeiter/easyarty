@@ -1,4 +1,3 @@
-import { ThemeProvider } from "next-themes";
 import Calculator from "./components/calculator";
 import Footer from "./components/footer";
 import Header from "./components/header";

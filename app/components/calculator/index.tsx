@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useRef } from "react";
 import { ChangeEvent, useState } from "react";
@@ -8,9 +8,9 @@ import Input from "./input";
 import uuidv4 from "../../lib/uuidv4";
 
 const Calculator = () => {
-  const [input, setInput] = useState(1000);
-  const [error, setError] = useState("");
-  const [result, setResult] = useState(764);
+  const [input, setInput] = useState<string>();
+  const [error, setError] = useState<string>();
+  const [result, setResult] = useState<number>(764);
   const [results, setResults] = useState<Result[]>([]);
   const [russianArty, setRussianArty] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -40,7 +40,7 @@ const Calculator = () => {
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     try {
-      setInput(parseInt(e.target.value));
+      setInput(e.target.value);
       const output = calculate(russianArty, parseInt(e.target.value));
       if (output) {
         setResult(output);
@@ -61,7 +61,7 @@ const Calculator = () => {
   const onRussianArtyChange = (e: ChangeEvent<HTMLInputElement>) => {
     setRussianArty(e.target.checked);
     try {
-      const output = calculate(e.target.checked, input);
+      const output = calculate(e.target.checked, parseInt(input));
       if (output) {
         setResult(output);
         setError("");
@@ -88,7 +88,7 @@ const Calculator = () => {
         ...prev,
         {
           id: uuidv4(),
-          input,
+          input: parseInt(input),
           team: russianArty ? "Russia" : "Axis/Ally",
           output: result,
         },
@@ -128,7 +128,7 @@ const Calculator = () => {
           </div>
         )}
         <output
-          className="w-full px-4 py-2 text-4xl text-center text-gray-700 bg-gray-200 rounded-lg dark:text-gray-100 dark:bg-gray-700"
+          className={`w-full px-4 py-2 text-4xl text-center text-gray-700 bg-gray-200 rounded-lg dark:text-gray-100 dark:bg-gray-700 ${error ? `text-red-600 dark:text-red-300` : ''}`}
           aria-live="polite"
         >
           {result}

@@ -14,11 +14,11 @@ type ResultsProps = {
 
 const Results = ({ results, setResults }: ResultsProps) => {
   const tableClasses = "w-full table-auto";
-  const tableHeadClasses = "w-full bg-gray-100 dark:bg-gray-800";
+  const tableHeadClasses = "w-full bg-gray-100 dark:bg-gray-800 dark:text-gray-300"
   const tableBodyClasses = "w-full";
   const tableRowClasses = "w-full";
   const tableCellClasses =
-    "px-2 py-2 text-center border border-gray-200 dark:border-gray-700";
+    "px-2 py-2 text-center border border-gray-200 dark:border-gray-700 dark:text-gray-300";
 
   const columns = ["Distance", "Result", "Team"];
 
@@ -36,7 +36,11 @@ const Results = ({ results, setResults }: ResultsProps) => {
         <thead className={tableHeadClasses}>
           <tr className={tableRowClasses}>
             {columns.map((column) => {
-              return <th className={tableCellClasses} key={column}>{column}</th>;
+              return (
+                <th className={tableCellClasses} key={column}>
+                  {column}
+                </th>
+              );
             })}
             <th className={tableCellClasses}>Delete</th>
           </tr>

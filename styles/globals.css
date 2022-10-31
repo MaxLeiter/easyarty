@@ -6,3 +6,14 @@
 #modal {
     z-index: 9999;
 }
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        color-scheme: dark;
+    }
+}
+
+:root {
+    accent-color: #ff0000;
+}

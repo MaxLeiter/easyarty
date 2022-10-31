@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <p>
+    <p className="text-gray-500 dark:text-gray-100">
       Made by{" "}
       <Link
         role="link"
