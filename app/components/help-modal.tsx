@@ -24,7 +24,7 @@ const HelpModal = ({ isOpen, onClose }) => {
 
   return (
     <dialog
-      className="fixed inset-0 flex items-center justify-center"
+      className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto"
       open={isOpen}
     >
       <div

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import HelpModal from "./help-modal";
@@ -49,6 +49,9 @@ const Header = () => {
       <p className="text-center text-gray-700 dark:text-gray-300">
         Hell Let Loose artillery calculator
       </p>
+      <span className="text-xs text-center text-gray-500 dark:text-gray-400">
+        British support will be implemented soon!
+      </span>
       <div id="modal" />
       {helpOpen && <HelpModal isOpen={helpOpen} onClose={toggleHelp} />}
     </div>
