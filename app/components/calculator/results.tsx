@@ -1,10 +1,11 @@
 import { Dispatch, memo, SetStateAction } from "react";
+import { Faction } from ".";
 
 export type Result = {
   id: string;
   input: number;
   output: number;
-  team: "Axis/Ally" | "Russia";
+  faction: Faction;
 };
 
 type ResultsProps = {
@@ -14,16 +15,33 @@ type ResultsProps = {
 
 const Results = ({ results, setResults }: ResultsProps) => {
   const tableClasses = "w-full table-auto";
-  const tableHeadClasses = "w-full bg-gray-100 dark:bg-gray-800 dark:text-gray-300"
+  const tableHeadClasses =
+    "w-full bg-gray-100 dark:bg-gray-800 dark:text-gray-300";
   const tableBodyClasses = "w-full";
   const tableRowClasses = "w-full";
   const tableCellClasses =
     "px-2 py-2 text-center border border-gray-200 dark:border-gray-700 dark:text-gray-300";
 
-  const columns = ["Distance", "Result", "Team"];
+  const columns = ["Distance", "Result", "Faction"];
+
+  const getFactionName = (faction: string) => {
+    switch (faction) {
+      case "german":
+        return "Axis/Ally";
+      case "british":
+        return "British";
+      case "russian":
+        return "Russian";
+    }
+  };
 
   const data = results.map((result) => {
-    return [result.input, result.output, result.team, result.id];
+    return [
+      result.input,
+      result.output,
+      getFactionName(result.faction),
+      result.id,
+    ];
   });
 
   return (

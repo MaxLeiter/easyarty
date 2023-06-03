@@ -2,17 +2,28 @@
 
 import { useEffect, useRef } from "react";
 import { ChangeEvent, useState } from "react";
-import calculate, { DistanceError } from "../../lib/calculate";
+import calculate, { DistanceError, options } from "../../lib/calculate";
 import Results, { Result } from "./results";
 import Input from "./input";
 import uuidv4 from "../../lib/uuidv4";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+
+export type Faction = "german" | "british" | "russian";
 
 const Calculator = () => {
   const [input, setInput] = useState<number>();
   const [error, setError] = useState<string>();
   const [result, setResult] = useState<number>(764);
   const [results, setResults] = useState<Result[]>([]);
-  const [russianArty, setRussianArty] = useState(false);
+  const [faction, setFaction] = useState<Faction>("german");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -40,42 +51,56 @@ const Calculator = () => {
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     try {
-      setInput(parseInt(e.target.value));
-      const output = calculate(russianArty, parseInt(e.target.value));
+      const value = parseInt(e.target.value);
+      setInput(value);
+      updateCalculation(value, faction);
+    } catch (e) {
+      setError("Input must be a number.");
+      console.error(e);
+    }
+  };
+
+  const updateCalculation = (x: number, faction: Faction) => {
+    if (!options[faction]) {
+      alert("No faction selected");
+      return;
+    }
+
+    try {
+      const output = calculate(x, options[faction]);
+      console.log("input", x, "output", output);
       if (output) {
         setResult(output);
         setError("");
       }
     } catch (e) {
-      if (input) {
-        if (e instanceof DistanceError) {
-          setError(e.message);
-        }
-      } else {
-        setError("Input must be a number.");
-        console.error(e);
+      // check for x so we don't show an error when input is empty
+      if (x && e instanceof DistanceError) {
+        setError(e.message);
       }
     }
   };
 
-  const onRussianArtyChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRussianArty(e.target.checked);
-    try {
-      const output = calculate(e.target.checked, input);
-      if (output) {
-        setResult(output);
-        setError("");
-      }
-    } catch (e) {
-      if (input) {
-        if (e instanceof DistanceError) {
-          setError(e.message);
-        }
-      } else {
-        setError("Input must be a number.");
-        console.error(e);
-      }
-    }
+  const onFactionChange = (newFaction: Faction) => {
+    console.log("newFaction", newFaction);
+    setFaction(newFaction);
+    updateCalculation(input, newFaction);
+    // try {
+    //   const output = calculate(e.target.checked, input);
+    //   if (output) {
+    //     setResult(output);
+    //     setError("");
+    //   }
+    // } catch (e) {
+    //   if (input) {
+    //     if (e instanceof DistanceError) {
+    //       setError(e.message);
+    //     }
+    //   } else {
+    //     setError("Input must be a number.");
+    //     console.error(e);
+    //   }
+    // }
   };
 
   const saveResult = () => {
@@ -89,7 +114,7 @@ const Calculator = () => {
         {
           id: uuidv4(),
           input,
-          team: russianArty ? "Russia" : "Axis/Ally",
+          faction,
           output: result,
         },
       ]);
@@ -110,17 +135,19 @@ const Calculator = () => {
           htmlFor="default-toggle"
           className="relative inline-flex w-full cursor-pointer"
         >
-          <input
-            type="checkbox"
-            checked={russianArty}
-            id="default-toggle"
-            className="sr-only peer"
-            onChange={onRussianArtyChange}
-          />
-          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-          <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-            Russian?
-          </span>
+          <Select onValueChange={onFactionChange} value={faction}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select a faction" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Factions</SelectLabel>
+                <SelectItem value="german">Axis/Ally</SelectItem>
+                <SelectItem value="russian">USSR</SelectItem>
+                <SelectItem value="british">British</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </label>
         {error && (
           <div className="flex items-center justify-center w-full px-4 py-2 text-sm text-red-600 bg-red-100 rounded-md dark:bg-red-800 dark:text-red-300">
@@ -128,7 +155,9 @@ const Calculator = () => {
           </div>
         )}
         <output
-          className={`w-full px-4 py-2 text-4xl text-center text-gray-700 bg-gray-200 rounded-lg dark:text-gray-100 dark:bg-gray-700 ${error ? `text-red-600 dark:text-red-300` : ''}`}
+          className={`w-full px-4 py-2 text-4xl text-center text-gray-700 bg-gray-200 rounded-lg dark:text-gray-100 dark:bg-gray-700 ${
+            error ? `text-red-600 dark:text-red-300` : ""
+          }`}
           aria-live="polite"
         >
           {result}

@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { xMax, xMin } from "../../lib/calculate";
-
 const Input = forwardRef<
   HTMLInputElement,
   {

@@ -49,9 +49,8 @@ const Header = () => {
       <p className="text-center text-gray-700 dark:text-gray-300">
         Hell Let Loose artillery calculator
       </p>
-      <span className="text-xs text-center text-gray-500 dark:text-gray-400">
-        British support will be implemented soon!
-      </span>
+      {/* <span className="text-xs text-center text-gray-500 dark:text-gray-400">
+      </span> */}
       <div id="modal" />
       {helpOpen && <HelpModal isOpen={helpOpen} onClose={toggleHelp} />}
     </div>
