@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import va from "@vercel/analytics";
 
 export type Faction = "german" | "british" | "russian";
 
@@ -68,7 +69,12 @@ const Calculator = () => {
 
     try {
       const output = calculate(x, options[faction]);
-      console.log("input", x, "output", output);
+
+      va.track("calculation", {
+        input: x,
+        faction,
+      });
+
       if (output) {
         setResult(output);
         setError("");
@@ -82,31 +88,19 @@ const Calculator = () => {
   };
 
   const onFactionChange = (newFaction: Faction) => {
-    console.log("newFaction", newFaction);
     setFaction(newFaction);
     updateCalculation(input, newFaction);
-    // try {
-    //   const output = calculate(e.target.checked, input);
-    //   if (output) {
-    //     setResult(output);
-    //     setError("");
-    //   }
-    // } catch (e) {
-    //   if (input) {
-    //     if (e instanceof DistanceError) {
-    //       setError(e.message);
-    //     }
-    //   } else {
-    //     setError("Input must be a number.");
-    //     console.error(e);
-    //   }
-    // }
   };
 
   const saveResult = () => {
     if (document.querySelector("dialog")) {
       return;
     }
+
+    va.track("saved result", {
+      input,
+      faction,
+    });
 
     if (input && result) {
       setResults((prev) => [
