@@ -3,11 +3,8 @@
  */
 const nextConfig = {
   experimental: {
-    swcFileReading: true,
-    appDir: true,
-    newNextLinkBehavior: true,
+    reactCompiler: true,
   },
-  swcMinify: true,
 };
 
 module.exports = nextConfig;
