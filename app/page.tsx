@@ -1,12 +1,11 @@
 import Calculator from "./components/calculator";
 import Footer from "./components/footer";
 import Header from "./components/header";
-import ThemeSwitch from "./components/theme-switcher";
 
 export default function Home() {
   return (
     <>
-      <div className="container flex flex-col justify-between min-w-full min-h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="container flex flex-col justify-between min-w-full min-h-screen">
         <section className="flex items-center justify-center w-full">
           <Header />
         </section>
