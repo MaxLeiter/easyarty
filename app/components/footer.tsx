@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="flex flex-row items-center justify-between w-full">
+    <div className="flex flex-col items-center justify-between w-full sm:flex-row">
       <p className="text-gray-500 dark:text-gray-100">
         Made by{" "}
         <Link
@@ -26,7 +26,7 @@ const Footer = () => {
         </Link>
         .
       </p>
-      <p>
+      <p className="hidden md:block">
         Recommended reading:{" "}<Link href="/blog/artillery" className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-600 hover:underline">
           Efficiently using Artillery in Hell Let Loose
         </Link>
