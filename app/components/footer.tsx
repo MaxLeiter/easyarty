@@ -3,7 +3,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <div className="flex flex-col items-center justify-between w-full sm:flex-row">
-      <p className="text-gray-500 dark:text-gray-100">
+      <p >
         Made by{" "}
         <Link
           role="link"

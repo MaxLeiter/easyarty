@@ -1,10 +1,16 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  next-themes@0.3.0:
+    hash: bw2iybairhimp3ae5xhpu6wceu
+    path: patches/next-themes@0.3.0.patch
+
 specifiers:
   '@mdx-js/loader': ^3.0.1
   '@mdx-js/react': ^3.0.1
   '@next/mdx': 15.0.0-rc.0
   '@radix-ui/react-select': ^1.2.2
+  '@radix-ui/react-slot': ^1.0.2
   '@tailwindcss/typography': ^0.5.13
   '@types/mdx': ^2.0.13
   '@types/node': 18.11.0
@@ -19,7 +25,7 @@ specifiers:
   eslint-config-next: 13.4.5-canary.4
   lucide-react: ^0.233.0
   next: 15.0.0-rc.0
-  next-themes: ^0.2.1
+  next-themes: ^0.3.0
   postcss: ^8.4.18
   react: 19.0.0-rc-935180c7e0-20240524
   react-dom: 19.0.0-rc-935180c7e0-20240524
@@ -34,7 +40,7 @@ dependencies:
   '@mdx-js/react': 3.0.1_k6byizo2vu3eoxfiw2reyyfqiy
   '@next/mdx': 15.0.0-rc.0_3wbfjokkmunqc55tlulaiof6um
   '@radix-ui/react-select': 1.2.2_fsytf4f5cxztv6z7kehwfx6ueu
-  '@tailwindcss/typography': 0.5.13_tailwindcss@3.2.1
+  '@radix-ui/react-slot': 1.0.2_k6byizo2vu3eoxfiw2reyyfqiy
   '@types/mdx': 2.0.13
   '@vercel/analytics': 1.0.1
   babel-plugin-react-compiler: 0.0.0-experimental-592953e-20240517
@@ -43,7 +49,7 @@ dependencies:
   eslint-config-next: 13.4.5-canary.4_typescript@4.8.4
   lucide-react: 0.233.0_h4rebnm46eiag5ofrst3xm6boe
   next: 15.0.0-rc.0_fnafzdrrh55nkzgmqjbugmjljq
-  next-themes: 0.2.1_2mx57vuccnb454abuep2mb6o5y
+  next-themes: 0.3.0_bw2iybairhimp3ae5xhpu6wceu_wcnfmiooznhczivhytkiplzv6m
   react: 19.0.0-rc-935180c7e0-20240524
   react-dom: 19.0.0-rc-935180c7e0-20240524_h4rebnm46eiag5ofrst3xm6boe
   react-feather: 2.0.10_h4rebnm46eiag5ofrst3xm6boe
@@ -51,6 +57,7 @@ dependencies:
   tailwindcss-animate: 1.0.5_tailwindcss@3.2.1
 
 devDependencies:
+  '@tailwindcss/typography': 0.5.13_tailwindcss@3.2.1
   '@types/node': 18.11.0
   '@types/react': 18.3.3
   '@types/react-dom': 18.3.0
@@ -966,7 +973,7 @@ packages:
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.2.1_postcss@8.4.18
-    dev: false
+    dev: true
 
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -2736,11 +2743,11 @@ packages:
 
   /lodash.castarray/4.4.0:
     resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
-    dev: false
+    dev: true
 
   /lodash.isplainobject/4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
-    dev: false
+    dev: true
 
   /lodash.memoize/4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
@@ -2748,7 +2755,7 @@ packages:
 
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
-    dev: false
+    dev: true
 
   /lodash.uniq/4.5.0:
     resolution: {integrity: sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==}
@@ -3218,17 +3225,16 @@ packages:
     hasBin: true
     dev: false
 
-  /next-themes/0.2.1_2mx57vuccnb454abuep2mb6o5y:
-    resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
+  /next-themes/0.3.0_bw2iybairhimp3ae5xhpu6wceu_wcnfmiooznhczivhytkiplzv6m:
+    resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
     peerDependencies:
-      next: '*'
-      react: '*'
-      react-dom: '*'
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
     dependencies:
-      next: 15.0.0-rc.0_fnafzdrrh55nkzgmqjbugmjljq
       react: 19.0.0-rc-935180c7e0-20240524
       react-dom: 19.0.0-rc-935180c7e0-20240524_h4rebnm46eiag5ofrst3xm6boe
     dev: false
+    patched: true
 
   /next/15.0.0-rc.0_fnafzdrrh55nkzgmqjbugmjljq:
     resolution: {integrity: sha512-IWcCvxUSCAuOK5gig4+9yiyt/dLKpIa+WT01Qcx4CBE4TtwJljyTDnCVVn64jDZ4qmSzsaEYXpb4DTI8qbk03A==}

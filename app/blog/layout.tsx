@@ -3,7 +3,6 @@
  * @see https://v0.dev/t/8msXN9vzLJj
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import Link from "next/link"
 import { PropsWithChildren } from "react"
 
 export default function Layout({ children }: PropsWithChildren) {

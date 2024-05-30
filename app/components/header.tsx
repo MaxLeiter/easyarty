@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import HelpModal from "./help-modal";
+import ThemeSwitch from "./theme-switcher";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const [helpOpen, setHelpOpen] = useState(false);
   const [hasEverOpenedHelp, setHasEverOpenedHelp] = useState(
     typeof window !== "undefined" &&
-      window.localStorage.getItem("easyarty.hasEverOpenedHelp") === "true"
+    window.localStorage.getItem("easyarty.hasEverOpenedHelp") === "true"
   );
 
   const toggleHelp = () => {
@@ -21,20 +23,20 @@ const Header = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full max-w-md py-3 space-y-1 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-      <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-gray-100">
+    <div className="flex flex-col items-center justify-center w-full max-w-md py-2 rounded-lg shadow-lg bg-card text-card-foreground">
+      <h1 className="text-4xl font-bold text-center">
         EasyArty
         {/* TODO: move this into help-modal */}
-        <button
-          className="relative inline-block ml-2 text-gray-500 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-800"
+        <Button
+          className="relative inline-block ml-2"
           onClick={toggleHelp}
           aria-label="Show help dialog"
+          variant="ghost"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`w-6 h-6 text-gray-500 dark:text-gray-400 ${
-              !hasEverOpenedHelp ? "animate-pulse" : ""
-            }`}
+            className={`w-6 h-6 text-gray-500 dark:text-gray-400 ${!hasEverOpenedHelp ? "animate-pulse" : ""
+              }`}
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -44,13 +46,11 @@ const Header = () => {
               clipRule="evenodd"
             />
           </svg>
-        </button>
+        </Button>
       </h1>
-      <p className="text-center text-gray-700 dark:text-gray-300">
+      <p className="text-center">
         Hell Let Loose artillery calculator
       </p>
-      {/* <span className="text-xs text-center text-gray-500 dark:text-gray-400">
-      </span> */}
       <div id="modal" />
       {helpOpen && <HelpModal isOpen={helpOpen} onClose={toggleHelp} />}
     </div>

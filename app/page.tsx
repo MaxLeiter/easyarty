@@ -1,6 +1,7 @@
 import Calculator from "./components/calculator";
 import Footer from "./components/footer";
 import Header from "./components/header";
+import ThemeSwitch from "./components/theme-switcher";
 
 export default function Home() {
   return (
@@ -14,9 +15,8 @@ export default function Home() {
             <Calculator />
           </section>
         </main>
-        <footer className="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+        <footer className="p-4 rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 bg-card">
           <Footer />
-          {/* <ThemeSwitch /> */}
         </footer>
       </div>
     </>

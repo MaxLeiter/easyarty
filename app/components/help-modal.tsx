@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MouseEventHandler, useEffect } from "react";
 import * as ReactDOM from "react-dom";
+import ThemeSwitch from "./theme-switcher";
 
 const HelpModal = ({ isOpen, onClose }) => {
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -69,6 +70,10 @@ const HelpModal = ({ isOpen, onClose }) => {
                 <li>Smoke &mdash; 5 munitions</li>
               </ul>
             </li>
+            <h2 className="pt-6 pb-1 text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
+              Change the theme
+            </h2>
+            <ThemeSwitch />
           </ul>
         </div>
         <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">

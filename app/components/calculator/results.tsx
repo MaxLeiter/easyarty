@@ -45,11 +45,10 @@ const Results = ({ results, setResults }: ResultsProps) => {
   });
 
   return (
-    <div className="w-full pt-4 border border-gray-300 rounded-md dark:border-gray-600">
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+    <aside className="w-full border rounded-md bg-card text-card-foreground">
+      <h2 className="my-4 text-2xl font-bold">
         Saved results
       </h2>
-      {/* <small>Drag to move</small> */}
       <table className={tableClasses}>
         <thead className={tableHeadClasses}>
           <tr className={tableRowClasses}>
@@ -89,7 +88,7 @@ const Results = ({ results, setResults }: ResultsProps) => {
           })}
         </tbody>
       </table>
-    </div>
+    </aside>
   );
 };
 

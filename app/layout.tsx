@@ -1,6 +1,7 @@
 import { Metadata } from "next";
-import "../styles/globals.css";
+import "./globals.css";
 import { AnalyticsWrapper } from "./components/analytics";
+import { ThemeProvider } from "./components/theme-provider";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://easyarty.com'),
@@ -18,16 +19,7 @@ export default function RootLayout({
     "A dead simple calculator for artillery in Hell Let Loose with support for all teams.";
   const pageTitle = "EasyArty - the Hell Let Loose artillery calculator";
   return (
-    // <ServerThemeProvider
-    //   attribute="class"
-    //   cookieName="maxleitercom-theme"
-    //   defaultTheme="dark"
-    //   value={{
-    //     light: "light",
-    //     dark: "dark",
-    //   }}
-    // >
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <title>{pageTitle}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,8 +35,15 @@ export default function RootLayout({
         <meta property="og:description" content={description} key="ogdesc" />
       </head>
       <body className="min-w-full min-h-screen bg-gray-100 dark:bg-gray-900">
-        {children}
-        <AnalyticsWrapper />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <AnalyticsWrapper />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import va from "@vercel/analytics";
+import { Button } from "../ui/button";
 
 export type Faction = "german" | "british" | "russian";
 
@@ -118,50 +119,45 @@ const Calculator = () => {
   return (
     <>
       <form
-        className="flex flex-col items-center justify-center flex-shrink-0 w-full max-w-md px-4 py-6 space-y-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+        className="flex flex-col items-center justify-center flex-shrink-0 w-full max-w-md px-4 py-6 space-y-4 rounded-lg shadow-lg bg-card text-card-foreground"
         onSubmit={(e) => {
           e.preventDefault();
           saveResult();
         }}
       >
         <Input value={input} onChange={onInputChange} ref={inputRef} />
-        <label
-          htmlFor="default-toggle"
-          className="relative inline-flex w-full cursor-pointer"
-        >
-          <Select onValueChange={onFactionChange} value={faction}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select a faction" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Factions</SelectLabel>
-                <SelectItem value="german">Axis/Ally</SelectItem>
-                <SelectItem value="russian">USSR</SelectItem>
-                <SelectItem value="british">British</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </label>
+        <Select onValueChange={onFactionChange} value={faction} name="team-select">
+          <SelectTrigger className="">
+            <SelectValue placeholder="Select a faction" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Factions</SelectLabel>
+              <SelectItem value="german">Axis/Ally</SelectItem>
+              <SelectItem value="russian">USSR</SelectItem>
+              <SelectItem value="british">British</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
         {error && (
           <div className="flex items-center justify-center w-full px-4 py-2 text-sm text-red-600 bg-red-100 rounded-md dark:bg-red-800 dark:text-red-300">
             {error}
           </div>
         )}
         <output
-          className={`w-full px-4 py-2 text-4xl text-center text-gray-700 bg-gray-200 rounded-lg dark:text-gray-100 dark:bg-gray-700 ${
-            error ? `text-red-600 dark:text-red-300` : ""
-          }`}
+          className={`w-full px-4 py-2 text-4xl text-center  rounded-lg  ${error ? `text-red-600 dark:text-red-300` : ""
+            }`}
           aria-live="polite"
         >
           {result}
         </output>
-        <button
+        <Button
           type="submit"
-          className="invisible w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md lg:visible hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-700"
+          className="w-full"
+          variant="outline"
         >
           Save
-        </button>
+        </Button>
       </form>
       <div className="absolute invisible w-96 h-96 -bottom-24 lg:top-0 lg:right-0 lg:visible">
         <div className="bg-gray-100 rounded-md dark:bg-gray-700">
