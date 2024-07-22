@@ -119,7 +119,7 @@ const Calculator = () => {
   return (
     <>
       <form
-        className="flex flex-col items-center justify-center flex-shrink-0 w-full max-w-md px-4 py-6 space-y-4 rounded-lg shadow-lg bg-card text-card-foreground"
+        className="flex flex-col items-center justify-center flex-shrink-0 w-full max-w-md mt-24 lg:mt-0 px-4 py-6 space-y-4 rounded-lg shadow-lg bg-card text-card-foreground"
         onSubmit={(e) => {
           e.preventDefault();
           saveResult();
@@ -159,7 +159,7 @@ const Calculator = () => {
           Save
         </Button>
       </form>
-      <div className="absolute invisible w-96 h-96 -bottom-24 lg:top-0 lg:right-0 lg:visible">
+      <div className="w-full max-w-md my-24 lg:w-96 lg:mt-0 lg:absolute lg:top-0 lg:right-0">
         <div className="bg-gray-100 rounded-md dark:bg-gray-700">
           <Results results={results} setResults={setResults} />
         </div>
