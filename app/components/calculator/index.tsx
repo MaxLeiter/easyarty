@@ -125,7 +125,6 @@ const Calculator = () => {
           saveResult();
         }}
       >
-        <Input value={input} onChange={onInputChange} ref={inputRef} />
         <Select onValueChange={onFactionChange} value={faction} name="team-select">
           <SelectTrigger className="">
             <SelectValue placeholder="Select a faction" />
@@ -151,6 +150,7 @@ const Calculator = () => {
         >
           {result}
         </output>
+        <Input value={input} onChange={onInputChange} ref={inputRef} />
         <Button
           type="submit"
           className="w-full"
